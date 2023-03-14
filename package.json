@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "boostrap": "^2.0.0",
+    "bootstrap": "^5.2.3",
     "history": "^5.3.0",
     "paramall-wheel-of-fortune": "^1.1.4",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.8.2",

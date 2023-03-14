@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Wheel } from "paramall-wheel-of-fortune";
 import { MovieInfo } from "./MovieInfo";
 import { renderHtml } from "./renderHtml";
+import Button from "react-bootstrap/Button";
+import { Container, Row, Col } from "react-bootstrap";
 
 const WheelSpin = () => {
   const [mustSpin, setMustSpin] = useState(false);
@@ -28,7 +30,9 @@ const WheelSpin = () => {
       })
       .finally(() => {
         const endTime = performance.now();
-        console.log(`Time taken to fetch movies: ${endTime - startTime} milliseconds`);
+        console.log(
+          `Time taken to fetch movies: ${endTime - startTime} milliseconds`
+        );
       });
   }, []);
 
@@ -49,23 +53,36 @@ const WheelSpin = () => {
 
   return (
     <>
-      <button onClick={handleSpinClick}>SPIN</button>
-      <MovieInfo movieJson={movieJson} />
-      {movies.length > 0 && (
-        <>
-          <div>
-            <Wheel
-              mustStartSpinning={mustSpin}
-              prizeNumber={prizeNumber}
-              data={movies}
-              backgroundColors={["#3e3e3e", "#df3428"]}
-              textColors={["#ffffff"]}
-              innerRadius={5}
-              onStopSpinning={onStopSpinning}
-            />
-          </div>
-        </>
-      )}
+      <Container>
+        <Row>
+          <Col sm={1}>
+            <Button onClick={handleSpinClick}>SPIN</Button>
+          </Col>
+          <Col sm={10}>
+            <MovieInfo movieJson={movieJson} />
+          </Col>
+        </Row>
+
+        {movies.length > 0 && (
+          <>
+            <Row>
+              <Col sm={12}>
+                <div className="wheel" >
+                  <Wheel
+                    mustStartSpinning={mustSpin}
+                    prizeNumber={prizeNumber}
+                    data={movies}
+                    backgroundColors={["#3e3e3e", "#df3428"]}
+                    textColors={["#ffffff"]}
+                    innerRadius={5}
+                    onStopSpinning={onStopSpinning}
+                  />
+                </div>
+              </Col>
+            </Row>
+          </>
+        )}
+      </Container>
     </>
   );
 };

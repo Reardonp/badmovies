@@ -10,6 +10,10 @@ import SignUp from './pages/signup';
 import Contact from './pages/contact';
 import Board from './pages/BingoBoard';
 import WheelSpin from './pages/wheelspin'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+
 
 
 function App() {
@@ -23,7 +27,6 @@ return (
 		<Route path='/blogs' element={<Blogs/>} /> */}
 		<Route path='/wheelspin' element={<WheelSpin/>} />
 		<Route path='/BingoBoard' element={<Board/>} />
-
 	</Routes>
 	</Router>
 );
