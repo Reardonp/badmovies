@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Wheel } from "paramall-wheel-of-fortune";
+import { Wheel} from "paramall-wheel-of-fortune";
 import { MovieInfo } from "./MovieInfo";
 import { renderHtml } from "./renderHtml";
 import Button from "react-bootstrap/Button";
 import { Container, Row, Col } from "react-bootstrap";
+import "../styles/style.css"
 
 const WheelSpin = () => {
   const [mustSpin, setMustSpin] = useState(false);
@@ -36,6 +37,7 @@ const WheelSpin = () => {
       });
   }, []);
 
+  
   const handleSpinClick = () => {
     const newPrizeNumber = Math.floor(Math.random() * movies.length);
     setPrizeNumber(newPrizeNumber);
@@ -49,6 +51,13 @@ const WheelSpin = () => {
     setMustSpin(false);
     //console.log("prizeText " + prizeText);
     renderHtml(prizeNumber, movies, setMovieJson);
+  };
+
+  const pointer = {
+    //src: 'path/to/image.png',
+    // style: {
+    //   border: '1px solid green',
+    // },
   };
 
   return (
@@ -67,14 +76,19 @@ const WheelSpin = () => {
           <>
             <Row>
               <Col sm={12}>
-                <div className="wheel" >
+                <div className="wheel" id="wheeldiv" >
                   <Wheel
+                    classname = "rotate-36deg"
                     mustStartSpinning={mustSpin}
                     prizeNumber={prizeNumber}
                     data={movies}
                     backgroundColors={["#3e3e3e", "#df3428"]}
                     textColors={["#ffffff"]}
-                    innerRadius={5}
+                    innerRadius={20}
+                    radiusLineWidth={0}
+                    spinDuration={.5}
+                    pointerProps={pointer}
+                    textDistance={70}
                     onStopSpinning={onStopSpinning}
                   />
                 </div>
