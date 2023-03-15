@@ -24,7 +24,16 @@ const WheelSpin = () => {
       })
       .then((data) => {
         const options = data.movies.map((movie) => ({ option: movie }));
+        if (options.length % 2 === 0){
+          options.push({option:"respin idiot"})
         setMovies(options);
+        } 
+        else {
+          options.push({option:"respin idiot"})
+          console.table(options)
+          setMovies(options)
+        }
+        
       })
       .catch((error) => {
         console.error("Error fetching movies:", error);
@@ -64,12 +73,13 @@ const WheelSpin = () => {
     <>
       <Container>
         <Row>
-          <Col sm={1}>
+          <Col sm={8}>
+          <h1>Spin The Wheel</h1>
             <Button onClick={handleSpinClick}>SPIN</Button>
           </Col>
-          <Col sm={10}>
+          </Row>
+          <Row>
             <MovieInfo movieJson={movieJson} />
-          </Col>
         </Row>
 
         {movies.length > 0 && (
