@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Wheel} from "paramall-wheel-of-fortune";
-import { MovieInfo } from "./MovieInfo";
+import MovieInfo from "./MovieInfo";
 import { renderHtml } from "./renderHtml";
 import Button from "react-bootstrap/Button";
 import { Container, Row, Col } from "react-bootstrap";

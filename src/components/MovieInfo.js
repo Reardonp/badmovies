@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-export function MovieInfo({ movieJson }) {
+function MovieInfo({ movieJson }) {
   function renderMovieInfo() {
     if (movieJson) {
       // Function to embed the trailer link
@@ -27,18 +27,21 @@ export function MovieInfo({ movieJson }) {
             <Container>
               <Row>
                 <Col sm={4}>
-                  <img
-                    src={movieJson.movie.thumb[0]._}
-                    alt="BigCo Inc. logo"
-                    style={{
-                      width: "100%",
-                    }}
-                  />
+                  {movieJson.movie.thumb[0]._ ? (
+                    <img
+                      src={movieJson.movie.thumb[0]._}
+                      alt="BigCo Inc. logo"
+                      style={{ width: "100%" }}
+                    />
+                  ) : null}
                 </Col>
                 <Col sm={8}>
+                  
                   <h1>{movieJson.movie.title[0] || "Missing data"}</h1>
+                  <Row><Col sm={6}>
+                   
                   <p>
-                    <b>Year:{" "}</b>
+                    <b>Year: </b>
                     {movieJson.movie.premiered[0]
                       ? new Date(
                           movieJson.movie.premiered[0]
@@ -48,18 +51,25 @@ export function MovieInfo({ movieJson }) {
                       : "Missing data"}
                   </p>
                   <p>
-                    <b>Runtime:{" "}</b>
+                    <b>Runtime: </b>
                     {movieJson.movie.runtime[0] + " minutes" || "Missing data"}
                   </p>
                   <p>
-                    <b>Rating: </b>{movieJson.movie.mpaa[0] || "Missing data"}
+                    <b>Rating: </b>
+                    {movieJson.movie.mpaa[0] || "Missing data"}
                   </p>
                   <p>
-                    <b>Genre:{" "}</b>
+                    <b>Genre: </b>
                     {movieJson.movie.genre && movieJson.movie.genre.length > 0
                       ? movieJson.movie.genre.join(", ")
                       : "Missing data"}
                   </p>
+                  </Col>
+                  <Col sm={6}>{movieJson.movie.trailer &&
+                    movieJson.movie.trailer.length > 0 &&
+                    embedTrailerLink(movieJson.movie.trailer[0])}
+                   
+                    </Col> </Row>
                   <p>
                     <b>Plot: </b>
                     <br />
@@ -72,9 +82,7 @@ export function MovieInfo({ movieJson }) {
                       ? movieJson.movie.tag.join(", ")
                       : "Missing data"}
                   </p>
-                  {movieJson.movie.trailer &&
-                    movieJson.movie.trailer.length > 0 &&
-                    embedTrailerLink(movieJson.movie.trailer[0])}
+                  
                 </Col>
               </Row>
             </Container>
@@ -88,3 +96,4 @@ export function MovieInfo({ movieJson }) {
 
   return <>{renderMovieInfo()}</>;
 }
+export default MovieInfo;
