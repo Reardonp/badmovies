@@ -35,8 +35,7 @@ function MovieInfo({ movieJson }) {
                     />
                   ) : null}
                 </Col>
-                <Col sm={8}>
-                  
+                <Col sm={8}>                  
                   <h1>{movieJson.movie.title[0] || "Missing data"}</h1>
                   <Row><Col sm={6}>
                    
