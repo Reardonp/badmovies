@@ -1,6 +1,10 @@
 #wheeldiv{
-    height: 50px;
-    width: 50px;
+    height: 50vh;
+    width: 50vh;
+}
+.bhdLno{
+    width: 100% !important;
+    height: 100% !important;
 }
 .rotate-36deg{
     transform: rotate(36deg);

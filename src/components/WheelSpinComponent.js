@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Wheel} from "paramall-wheel-of-fortune";
+import { Wheel } from "paramall-wheel-of-fortune";
 import MovieInfo from "./MovieInfo";
 import { renderHtml } from "./renderHtml";
 import Button from "react-bootstrap/Button";
 import { Container, Row, Col } from "react-bootstrap";
-import "../styles/style.css"
+import "../styles/style.css";
 
 const WheelSpin = () => {
   const [mustSpin, setMustSpin] = useState(false);
@@ -24,16 +24,14 @@ const WheelSpin = () => {
       })
       .then((data) => {
         const options = data.movies.map((movie) => ({ option: movie }));
-        if (options.length % 2 === 0){
-          options.push({option:"respin idiot"})
-        setMovies(options);
-        } 
-        else {
-          options.push({option:"respin idiot"})
-          console.table(options)
-          setMovies(options)
+        if (options.length % 2 === 0) {
+          options.push({ option: "respin idiot" });
+          setMovies(options);
+        } else {
+          options.push({ option: "respin idiot" });
+          console.table(options);
+          setMovies(options);
         }
-        
       })
       .catch((error) => {
         console.error("Error fetching movies:", error);
@@ -46,7 +44,6 @@ const WheelSpin = () => {
       });
   }, []);
 
-  
   const handleSpinClick = () => {
     const newPrizeNumber = Math.floor(Math.random() * movies.length);
     setPrizeNumber(newPrizeNumber);
@@ -74,36 +71,38 @@ const WheelSpin = () => {
       <Container>
         <Row>
           <Col sm={8}>
-          <h1>Spin The Wheel</h1>
+            <h1>Spin The Wheel</h1>
             <Button onClick={handleSpinClick}>SPIN</Button>
           </Col>
-          </Row>
-          <Row>
-            <MovieInfo movieJson={movieJson} />
+        </Row>
+        <Row>
+          <MovieInfo movieJson={movieJson} />
         </Row>
 
         {movies.length > 0 && (
           <>
-            <Row>
-              <Col sm={12}>
-                <div className="wheel" id="wheeldiv" >
-                  <Wheel
-                    classname = "rotate-36deg"
-                    mustStartSpinning={mustSpin}
-                    prizeNumber={prizeNumber}
-                    data={movies}
-                    backgroundColors={["#3e3e3e", "#df3428"]}
-                    textColors={["#ffffff"]}
-                    innerRadius={20}
-                    radiusLineWidth={0}
-                    spinDuration={.5}
-                    pointerProps={pointer}
-                    textDistance={70}
-                    onStopSpinning={onStopSpinning}
-                  />
-                </div>
-              </Col>
-            </Row>
+            <Container>
+              <Row>
+                <Col sm={12}>
+                  <div className="wheel" id="wheeldiv">
+                    <Wheel
+                      classname="rotate-36deg"
+                      mustStartSpinning={mustSpin}
+                      prizeNumber={prizeNumber}
+                      data={movies}
+                      backgroundColors={["#3e3e3e", "#df3428"]}
+                      textColors={["#ffffff"]}
+                      innerRadius={20}
+                      radiusLineWidth={0}
+                      spinDuration={0.5}
+                      pointerProps={pointer}
+                      textDistance={70}
+                      onStopSpinning={onStopSpinning}
+                    />
+                  </div>
+                </Col>
+              </Row>
+            </Container>
           </>
         )}
       </Container>
