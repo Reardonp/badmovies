@@ -1,6 +1,8 @@
 #wheeldiv{
     height: 50vh;
     width: 50vh;
+    /* overflow: hidden;
+    position: relative; */
 }
 .bhdLno{
     width: 100% !important;

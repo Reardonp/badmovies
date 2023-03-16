@@ -69,12 +69,7 @@ const WheelSpin = () => {
   return (
     <>
       <Container>
-        <Row>
-          <Col sm={8}>
-            <h1>Spin The Wheel</h1>
-            <Button onClick={handleSpinClick}>SPIN</Button>
-          </Col>
-        </Row>
+
         <Row>
           <MovieInfo movieJson={movieJson} />
         </Row>
@@ -82,6 +77,12 @@ const WheelSpin = () => {
         {movies.length > 0 && (
           <>
             <Container>
+            <Row>
+          <Col sm={8}>
+            <h1>Spin The Wheel</h1>
+            <Button onClick={handleSpinClick}>SPIN</Button>
+          </Col>
+        </Row>
               <Row>
                 <Col sm={12}>
                   <div className="wheel" id="wheeldiv">
