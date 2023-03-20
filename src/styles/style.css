@@ -14,3 +14,12 @@
 .hmocIu {
     transform: rotate(47deg);
 }
+.navItem:hover{
+    color:rgba(231, 12, 12, 0.938) !important;
+    text-decoration: underline;
+
+}
+body{
+    color: #ffffff !important;
+    background: #000 !important;
+}

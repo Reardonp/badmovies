@@ -27,7 +27,7 @@ function MovieInfo({ movieJson }) {
             <Container>
               <Row>
                 <Col sm={4}>
-                  {movieJson.movie.thumb[0]._ ? (
+                  {movieJson.movie.thumb? (
                     <img
                       src={movieJson.movie.thumb[0]._}
                       alt="BigCo Inc. logo"
