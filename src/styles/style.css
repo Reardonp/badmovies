@@ -23,3 +23,50 @@ body{
     color: #ffffff !important;
     background: #000 !important;
 }
+.movieContent{
+        max-width: 250px;
+        padding: 1rem;
+        color: white;
+        border-width: 3px;
+        border-style: solid;
+        border-image: 
+          linear-gradient(
+            to bottom, 
+            red, 
+            rgba(0, 0, 0, 0)
+          ) 1 100%;     
+
+}
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 2s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.fade-out {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 2s;
+}
+@keyframes fadeOutOpacity {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}

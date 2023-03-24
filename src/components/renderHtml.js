@@ -1,4 +1,5 @@
-export function renderHtml(prizeNumber, movies, setMovieJson) {
+export function renderHtml(prizeNumber, movies, setMovieJson, setLoadMovieDataDiv) {
+  console.log(prizeNumber)
   if (prizeNumber !== null && movies.length > prizeNumber) {
     fetch(`http://localhost:8888/nfo?folderName=${movies[prizeNumber].option}`)
       .then((response) => {
@@ -8,8 +9,9 @@ export function renderHtml(prizeNumber, movies, setMovieJson) {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-        setMovieJson(data);
+        console.log(data.movie.title);
+        
+        return [setMovieJson(data), setLoadMovieDataDiv(true)];
       })
       .catch((error) => {
         console.error("Error posting prize:", error);

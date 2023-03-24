@@ -12,6 +12,7 @@ const WheelSpin = () => {
   const [prizeText, setPrizeText] = useState("");
   const [movies, setMovies] = useState([]);
   const [movieJson, setMovieJson] = useState("");
+  const [loadMovieDataDiv, setLoadMovieDataDiv] = useState(false);
 
   useEffect(() => {
     const startTime = performance.now();
@@ -29,7 +30,7 @@ const WheelSpin = () => {
           setMovies(options);
         } else {
           options.push({ option: "respin idiot" });
-          console.table(options);
+          // console.table(options);
           setMovies(options);
         }
       })
@@ -45,6 +46,7 @@ const WheelSpin = () => {
   }, []);
 
   const handleSpinClick = () => {
+    setLoadMovieDataDiv(false)
     const newPrizeNumber = Math.floor(Math.random() * movies.length);
     setPrizeNumber(newPrizeNumber);
     setMustSpin(true);
@@ -52,12 +54,16 @@ const WheelSpin = () => {
   };
 
   const onStopSpinning = () => {
-    //console.log(movies[prizeNumber].option);
     setPrizeText(movies[prizeNumber].option);
     setMustSpin(false);
-    //console.log("prizeText " + prizeText);
-    renderHtml(prizeNumber, movies, setMovieJson);
+    if(prizeNumber){
+    renderHtml(prizeNumber, movies, setMovieJson, setLoadMovieDataDiv);    
+    }
+    if (movieJson) {
+      console.table(movieJson)
+    }
   };
+  
 
   const pointer = {
     //src: 'path/to/image.png',
@@ -69,20 +75,20 @@ const WheelSpin = () => {
   return (
     <>
       <Container>
-
-        <Row>
-          <MovieInfo movieJson={movieJson} />
-        </Row>
-
-        {movies.length > 0 && (
-          <>
-            <Container>
-            <Row>
+      <Row>
           <Col sm={8}>
             <h1>Spin The Wheel</h1>
             <Button onClick={handleSpinClick}>SPIN</Button>
           </Col>
         </Row>
+        <Row>
+          {loadMovieDataDiv===true && <MovieInfo movieJson={movieJson} loadMovieDataDiv={loadMovieDataDiv}/>}
+        </Row>
+
+        {movies.length > 0 && (
+          <>
+            <Container>
+
               <Row>
                 <Col sm={12}>
                   <div className="wheel" id="wheeldiv">
