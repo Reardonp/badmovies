@@ -46,18 +46,26 @@ const WheelSpin = () => {
   }, []);
 
   useEffect(() => {
-    if(prizeNumber){
+    if (prizeNumber) {
       if (prizeNumber !== null && movies.length > prizeNumber) {
-        fetch(`http://localhost:8888/nfo?folderName=${movies[prizeNumber].option}`)
-          .then(response => response.ok ? response.json() : Promise.reject(new Error(`HTTP error! status: ${response.status}`)))
-          .then(data => {
+        fetch(
+          `http://localhost:8888/nfo?folderName=${movies[prizeNumber].option}`
+        )
+          .then((response) =>
+            response.ok
+              ? response.json()
+              : Promise.reject(
+                  new Error(`HTTP error! status: ${response.status}`)
+                )
+          )
+          .then((data) => {
             console.log(data.movie.title);
             setMovieJson(data);
           })
-          .catch(error => console.error("Error posting prize:", error));
-      } 
+          .catch((error) => console.error("Error posting prize:", error));
+      }
     }
-  },[prizeNumber]);
+  }, [prizeNumber]);
 
   const handleSpinClick = () => {
     console.log("spin clicked");
@@ -72,9 +80,8 @@ const WheelSpin = () => {
     console.log("Stop spinning");
     setPrizeText(movies[prizeNumber].option);
     setMustSpin(false);
-    setIsVisible(true)
+    setIsVisible(true);
   };
-  
 
   const pointer = {
     //src: 'path/to/image.png',
@@ -86,21 +93,21 @@ const WheelSpin = () => {
   return (
     <>
       <Container>
-      <Row>
+        <Row>
           <Col sm={8}>
             <h1>Spin The Wheel</h1>
             <Button onClick={handleSpinClick}>SPIN</Button>
           </Col>
         </Row>
-        <div className="">
-        {isVisible ===true && <Row>
-          {<MovieInfo movieJson={movieJson}/>}
-        </Row>}
-        </div>
+        {isVisible === true &&(
+          <div className="">
+            <Row>{<MovieInfo movieJson={movieJson} />}</Row>
+          </div>
+        )}
+
         {movies.length > 0 && (
           <>
             <Container>
-
               <Row>
                 <Col sm={12}>
                   <div className="wheel" id="wheeldiv">

@@ -26,8 +26,8 @@ const MovieInfo = ({ movieJson }) => {
 
     function movieContent(embedTrailerLink) {
       return (
-        <Container className="movieContent">
-          <Row>
+        <Container className="movieContent gradientBorder">
+          <Row className="fade-in">
             <Col sm={4}>
               {movieJson.movie.thumb ? (
                 <img
