@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Wheel } from "paramall-wheel-of-fortune";
 import MovieInfo from "./MovieInfo";
-import { renderHtml } from "./renderHtml";
-import Button from "react-bootstrap/Button";
-import { Container, Row, Col } from "react-bootstrap";
+//import Button from "react-bootstrap/Button";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import "../styles/style.css";
 
 const WheelSpin = () => {
@@ -13,6 +12,7 @@ const WheelSpin = () => {
   const [movies, setMovies] = useState([]);
   const [movieJson, setMovieJson] = useState("");
   const [loadMovieDataDiv, setLoadMovieDataDiv] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const startTime = performance.now();
@@ -45,23 +45,34 @@ const WheelSpin = () => {
       });
   }, []);
 
+  useEffect(() => {
+    if(prizeNumber){
+      if (prizeNumber !== null && movies.length > prizeNumber) {
+        fetch(`http://localhost:8888/nfo?folderName=${movies[prizeNumber].option}`)
+          .then(response => response.ok ? response.json() : Promise.reject(new Error(`HTTP error! status: ${response.status}`)))
+          .then(data => {
+            console.log(data.movie.title);
+            setMovieJson(data);
+          })
+          .catch(error => console.error("Error posting prize:", error));
+      } 
+    }
+  },[prizeNumber]);
+
   const handleSpinClick = () => {
-    setLoadMovieDataDiv(false)
+    console.log("spin clicked");
     const newPrizeNumber = Math.floor(Math.random() * movies.length);
     setPrizeNumber(newPrizeNumber);
     setMustSpin(true);
+    setIsVisible(false);
     // renderHtml(prizeNumber, movies, setMovieJson);
   };
 
   const onStopSpinning = () => {
+    console.log("Stop spinning");
     setPrizeText(movies[prizeNumber].option);
     setMustSpin(false);
-    if(prizeNumber){
-    renderHtml(prizeNumber, movies, setMovieJson, setLoadMovieDataDiv);    
-    }
-    if (movieJson) {
-      console.table(movieJson)
-    }
+    setIsVisible(true)
   };
   
 
@@ -81,10 +92,11 @@ const WheelSpin = () => {
             <Button onClick={handleSpinClick}>SPIN</Button>
           </Col>
         </Row>
-        <Row>
-          {loadMovieDataDiv===true && <MovieInfo movieJson={movieJson} loadMovieDataDiv={loadMovieDataDiv}/>}
-        </Row>
-
+        <div className="">
+        {isVisible ===true && <Row>
+          {<MovieInfo movieJson={movieJson}/>}
+        </Row>}
+        </div>
         {movies.length > 0 && (
           <>
             <Container>

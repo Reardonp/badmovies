@@ -24,19 +24,20 @@ body{
     background: #000 !important;
 }
 .movieContent{
-        max-width: 250px;
-        padding: 1rem;
-        color: white;
-        border-width: 3px;
-        border-style: solid;
-        border-image: 
-          linear-gradient(
-            to bottom, 
-            red, 
-            rgba(0, 0, 0, 0)
-          ) 1 100%;     
-
-}
+    max-width: 250px;
+    padding: 1rem;
+    margin-top: 1rem;
+    border: 2px solid transparent;
+    background-image: 
+        linear-gradient(to right, rgb(255, 0, 0), rgb(0, 0, 0)), 
+        linear-gradient(to bottom, rgb(255, 0, 0), rgb(0, 0, 0)), 
+        linear-gradient(to left, rgb(255, 0, 0), rgb(0, 0, 0)), 
+        linear-gradient(to bottom, rgb(255, 0, 0), rgb(0, 0, 0));
+    background-origin: border-box;
+    background-size: 50% 5px, 0px 100%, 100% 0px, 5px 100%;
+    background-position: top left, top right, bottom right, bottom left;
+    background-repeat: no-repeat;
+    }
 
 .fade-in {
 	opacity: 1;
@@ -69,4 +70,59 @@ body{
 	100% {
 		opacity: 0;
 	}
+}
+.slide-in-top {
+    position: relative;;
+    top: 100px;
+    animation: slide-in-top  3.5s forwards;
+    overflow: hidden;
+    z-index: -1;
+  }
+  
+  @keyframes slide-in-top {
+    from {
+      top: -500px;
+      opacity: .25;
+    }
+    to {
+      top: 0;
+      opacity: 1;
+    }
+  }
+  .slide-in-top-container{
+    position: relative;
+
+  }
+  .slide-out-top {
+    position: relative;;
+    top: -100px;
+    animation: slide-out-top  1.5s forwards;
+    
+  }
+    
+  @keyframes slide-out-top {
+    from {
+      top: -100px;
+      opacity: 0;
+    }
+    to {
+      top: 0;
+      opacity: 1;
+    }
+  }
+  .expandable {
+    background: #000000;
+    overflow: hidden;
+    color: #ffffff  !important;
+  
+    transition: all .5s ease-in-out;
+    line-height: 0;
+    padding: 0 1em;
+    color: transparent;
+   }
+   .expandable:target {
+    line-height: 1.5;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    color: black;
 }

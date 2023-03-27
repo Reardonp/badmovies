@@ -1,38 +1,40 @@
-import React, {} from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-const MovieInfo =({ movieJson }, loadMovieDataDiv) => {
-  console.log(loadMovieDataDiv)
-  console.log(movieJson.movie.title)
-  function renderMovieInfo() {
-    console.log("wut")
-    if (movieJson) {
-      // Function to embed the trailer link
-      function embedTrailerLink(trailerLink) {
-        // Extract the video ID from the link
-        const videoId = trailerLink.split("videoid=")[1];
-        // Return the embedded video player with the video ID
-        return (
-          <div className="embed-responsive embed-responsive-16by9" key={Math.random()}>
-            <iframe
-              title="trailer"
-              className="embed-responsive-item"
-              src={`https://www.youtube.com/embed/${videoId}`}
-              allowFullScreen
-            />
-          </div>
-        );
-      }
+const MovieInfo = ({ movieJson }) => {
+  console.log("wut");
+  if (movieJson) {
+    // Function to embed the trailer link
+    function embedTrailerLink(trailerLink) {
+      // Extract the video ID from the link
+      const videoId = trailerLink.split("videoid=")[1];
+      // Return the embedded video player with the video ID
+      return (
+        <div
+          className="embed-responsive embed-responsive-16by9"
+          key={Math.random()}
+        >
+          <iframe
+            title="trailer"
+            className="embed-responsive-item"
+            src={`https://www.youtube.com/embed/${videoId}`}
+            allowFullScreen
+          />
+        </div>
+      );
+    }
 
-      function movieContent(embedTrailerLink) {
-        return <Container className="movieContent fade-in" >
+    function movieContent(embedTrailerLink) {
+      return (
+        <Container className="movieContent">
           <Row>
             <Col sm={4}>
               {movieJson.movie.thumb ? (
                 <img
                   src={movieJson.movie.thumb[0]._}
                   alt="BigCo Inc. logo"
-                  style={{ width: "100%" }} />
+                  style={{ width: "100%" }}
+                />
               ) : (
                 <p>No Image Available</p>
               )}
@@ -45,16 +47,15 @@ const MovieInfo =({ movieJson }, loadMovieDataDiv) => {
                     <b>Year: </b>
                     {movieJson.movie.premiered[0]
                       ? new Date(
-                        movieJson.movie.premiered[0]
-                      ).toLocaleDateString("en-US", {
-                        year: "numeric",
-                      })
+                          movieJson.movie.premiered[0]
+                        ).toLocaleDateString("en-US", {
+                          year: "numeric",
+                        })
                       : "Missing data"}
                   </p>
                   <p>
                     <b>Runtime: </b>
-                    {movieJson.movie.runtime[0] + " minutes" ||
-                      "Missing data"}
+                    {movieJson.movie.runtime[0] + " minutes" || "Missing data"}
                   </p>
                   <p>
                     <b>Rating: </b>
@@ -62,8 +63,7 @@ const MovieInfo =({ movieJson }, loadMovieDataDiv) => {
                   </p>
                   <p>
                     <b>Genre: </b>
-                    {movieJson.movie.genre &&
-                      movieJson.movie.genre.length > 0
+                    {movieJson.movie.genre && movieJson.movie.genre.length > 0
                       ? movieJson.movie.genre.join(", ")
                       : "Missing data"}
                   </p>
@@ -88,23 +88,18 @@ const MovieInfo =({ movieJson }, loadMovieDataDiv) => {
               </p>
             </Col>
           </Row>
-        </Container>;
-      }
-
-      return (
-        <>
-          <div>
-            {movieContent(embedTrailerLink)}
-          </div>
-        </>
+        </Container>
       );
-    } else {
-      return <p>No data available</p>;
     }
+
+    return (
+      <>
+        <div>{movieContent(embedTrailerLink)}</div>
+      </>
+    );
+  } else {
+    return <p>Loading...</p>;
   }
+};
 
-  return <>{renderMovieInfo()}</>;
-
-  
-}
 export default MovieInfo;
